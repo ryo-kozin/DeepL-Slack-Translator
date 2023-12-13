@@ -3,7 +3,7 @@ import express from 'express'
 import { Logger } from './lib/logger'
 import { handleWebhook } from './handleWebhook'
 
-const appEnv = process.env.APP_ENV || 'local'
+const appEnv = process.env.APP_ENV ?? 'local'
 const logger = new Logger(appEnv)
 const app = express()
 
