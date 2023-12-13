@@ -3,6 +3,9 @@ import { extractTextAndTimestamp } from './extractTextAndTimestamp'
 import { translateText } from './translateText'
 import { postToSlack } from './postToSlack'
 import { type SlackEventBody } from './interfaces'
+import { Logger } from './../src/lib/logger'
+
+const logger = new Logger(process.env.APP_ENV ?? 'local')
 
 export async function handleWebhook(
   req: express.Request,
@@ -16,12 +19,13 @@ export async function handleWebhook(
     const { text, ts } = extractTextAndTimestamp(req.body as SlackEventBody)
 
     const translatedText = await translateText(text)
+
     await postToSlack(translatedText, ts)
     res.send('Translation posted')
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message)
-      res.status(500).send(error.message ?? 'Error in processing request')
+  } catch (e) {
+    if (e instanceof Error) {
+      logger.error(e.message)
+      res.status(500).send(e.message ?? 'Error in processing request')
     }
   }
 }

@@ -8,7 +8,7 @@ export class Logger {
     const filename =
       appEnv === 'test' ? 'test-%DATE%.log' : 'application-%DATE%.log'
     this.logger = winston.createLogger({
-      level: appEnv !== 'local' ? 'debug' : 'info',
+      level: appEnv === 'local' ?? appEnv === 'test' ? 'info' : 'debug',
       format: winston.format.combine(
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         winston.format.errors({ stack: true }),

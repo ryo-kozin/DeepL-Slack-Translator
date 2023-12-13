@@ -3,8 +3,7 @@ import express from 'express'
 import { Logger } from './lib/logger'
 import { handleWebhook } from './handleWebhook'
 
-const appEnv = process.env.APP_ENV ?? 'local'
-const logger = new Logger(appEnv)
+const logger = new Logger(process.env.APP_ENV ?? 'local')
 const app = express()
 
 try {
@@ -19,7 +18,7 @@ try {
     })
   }
 } catch (e: any) {
-  logger.getLogger().error(`An error occurred: ${e.message}`)
+  logger.error(`An error occurred: ${e.message}`)
 }
 
 export default app

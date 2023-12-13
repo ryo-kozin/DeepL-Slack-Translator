@@ -15,15 +15,16 @@ describe('postToSlack', () => {
       thread_ts: '12345',
     }
 
-    const options = {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      data: JSON.stringify(data),
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     }
+    const payload = { payload: JSON.stringify(data) }
 
     await postToSlack('test text', '12345')
 
-    expect(axios.post).toHaveBeenCalledWith(process.env.WEBHOOK_URL, options)
+    expect(axios.post).toHaveBeenCalledWith(process.env.WEBHOOK_URL, payload, {
+      headers,
+    })
   })
 
   it('should post data to Slack', async () => {
@@ -33,15 +34,16 @@ describe('postToSlack', () => {
       text: 'test text',
     }
 
-    const options = {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      data: JSON.stringify(data),
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     }
+    const payload = { payload: JSON.stringify(data) }
 
     await postToSlack('test text', '12345')
 
-    expect(axios.post).toHaveBeenCalledWith(process.env.WEBHOOK_URL, options)
+    expect(axios.post).toHaveBeenCalledWith(process.env.WEBHOOK_URL, payload, {
+      headers,
+    })
 
     process.env.THREAD_POST_FLG = 'true'
   })

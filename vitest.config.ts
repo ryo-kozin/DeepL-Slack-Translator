@@ -4,5 +4,10 @@ import dotenv from 'dotenv'
 dotenv.config({ path: './.env.test' })
 
 export default defineConfig({
-  test: {},
+  test: {
+    setupFiles: ['./tests/setup.ts'],
+    coverage: {
+      reportsDirectory: './tests/coverage',
+    },
+  },
 })

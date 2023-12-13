@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { Logger } from './../src/lib/logger'
+const logger = new Logger(process.env.APP_ENV ?? 'local')
 
 export async function postToSlack(text: string, ts: string): Promise<void> {
   const { THREAD_POST_FLG, WEBHOOK_URL } = process.env
@@ -7,16 +9,22 @@ export async function postToSlack(text: string, ts: string): Promise<void> {
     throw new Error('Webhook URL is not defined')
   }
 
-  const data = {
-    text,
-    ...(THREAD_POST_FLG === 'true' && ts !== '' ? { thread_ts: ts } : {}),
-  }
+  try {
+    const data = {
+      text,
+      ...(THREAD_POST_FLG === 'true' && ts !== '' ? { thread_ts: ts } : {}),
+    }
 
-  const options = {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-    data: JSON.stringify(data),
-  }
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    }
+    const payload = { payload: JSON.stringify(data) }
 
-  await axios.post(WEBHOOK_URL, options)
+    await axios.post(WEBHOOK_URL, payload, { headers })
+  } catch (e) {
+    if (e instanceof Error) {
+      logger.error(e.message)
+      throw e
+    }
+  }
 }
