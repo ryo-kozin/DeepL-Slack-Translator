@@ -1,14 +1,14 @@
 #!/bin/sh
 
 # ESLintの実行と自動修正
-npx eslint --fix ./src/*.ts
+npx eslint --fix --max-warnings 0 ./src/*.ts
 if [ $? -ne 0 ]; then
     echo "ESLint failed."
     exit 1
 fi
 
 # Prettierによるコードフォーマット
-npx prettier ./src/*.ts --write --config .prettierrc
+npx prettier ./src/*.ts --write --check --config .prettierrc
 if [ $? -ne 0 ]; then
     echo "Prettier failed."
     exit 1
