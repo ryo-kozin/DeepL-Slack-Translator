@@ -7,7 +7,7 @@
     "dev-cp": "nodemon",
     "start": "nodemon ./dist/main.js",
     "dev": "nodemon",
-    "test": "vitest run"
+    "test": "vitest run --coverage"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -33,6 +33,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "franc": "^6.1.0",
-    "winston": "^3.11.0"
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1"
   }
 }

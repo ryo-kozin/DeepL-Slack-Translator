@@ -1,41 +1,55 @@
 import winston from 'winston'
+import DailyRotateFile from 'winston-daily-rotate-file'
 
 export class Logger {
-  private logger!: winston.Logger
-  private logLevel!: string
+  private logger: winston.Logger
 
   constructor(private appEnv: string) {
-    this.initialize()
-  }
-
-  private initialize(): void {
-    this.logLevel = this.appEnv !== 'local' ? 'debug' : 'info'
-
+    const filename =
+      appEnv === 'test' ? 'test-%DATE%.log' : 'application-%DATE%.log'
     this.logger = winston.createLogger({
-      level: this.logLevel,
+      level: appEnv !== 'local' ? 'debug' : 'info',
       format: winston.format.combine(
-        winston.format.timestamp({
-          format: 'YYYY-MM-DD HH:mm:ss',
-        }),
+        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         winston.format.errors({ stack: true }),
         winston.format.splat(),
         winston.format.json(),
       ),
-      defaultMeta: { service: 'winston-lambda' },
       transports: [
-        new winston.transports.Console({
-          level: this.logLevel,
+        new winston.transports.Console(),
+        new DailyRotateFile({
+          dirname: 'logs',
+          filename,
+          datePattern: 'YYYY-MM-DD',
+          zippedArchive: true,
+          maxSize: '20m',
+          maxFiles: '14d',
         }),
       ],
     })
   }
 
-  public getLogger(): winston.Logger {
-    return this.logger
+  info(message: string, ...meta: any[]) {
+    this.logger.info(message, ...meta)
   }
 
-  public setLogLevel(logLevel: string): void {
-    this.logLevel = logLevel
-    this.logger.transports[0].level = logLevel
+  debug(message: string, ...meta: any[]) {
+    this.logger.debug(message, ...meta)
+  }
+
+  error(message: string, ...meta: any[]) {
+    this.logger.error(message, ...meta)
+  }
+
+  warn(message: string, ...meta: any[]) {
+    this.logger.warn(message, ...meta)
+  }
+
+  verbose(message: string, ...meta: any[]) {
+    this.logger.verbose(message, ...meta)
+  }
+
+  silly(message: string, ...meta: any[]) {
+    this.logger.silly(message, ...meta)
   }
 }
