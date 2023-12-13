@@ -1,11 +1,7 @@
-// import dotenv from 'dotenv'
-// import * as dotenv from 'dotenv/config'
-// import dotenv from 'dotenv'
-// import 'dotenv/config'
+import 'dotenv/config'
 import express from 'express'
 import { Logger } from './lib/logger'
 import { handleWebhook } from './handleWebhook'
-// dotenv.config()
 
 const appEnv = process.env.APP_ENV || 'local'
 const logger = new Logger(appEnv)
