@@ -1,17 +1,7 @@
 {
   "compilerOptions": {
     "module": "ES2022",
-    // "target": "ES2022",
-    "lib": ["esnext"],
-
-    "target": "es6",
-
-    // "target": "es6",
-    // "module": "commonjs",
-
-    // "module": "node16",
-    // "lib": ["dom", "es2015"],
-
+    "target": "ES2022",
     "strict": true,
     "declaration": true,
     "incremental": true,
@@ -22,7 +12,7 @@
     "noImplicitAny": false,
     "outDir": "dist",
     "types": ["vitest/importMeta"],
-    "moduleResolution": "node"
+    "moduleResolution": "Bundler"
   },
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"]
 }
