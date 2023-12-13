@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "ES2022",
+    // "target": "ES2022",
+    "lib": ["esnext"],
+
+    "target": "es6",
+
+    // "target": "es6",
+    // "module": "commonjs",
+
+    // "module": "node16",
+    // "lib": ["dom", "es2015"],
+
+    "strict": true,
+    "declaration": true,
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "outDir": "dist",
+    "types": ["vitest/importMeta"],
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,4 @@
+{
+  "name": "DeepL-Slack-Translator",
+  "script": "./dist/main.js"
+}

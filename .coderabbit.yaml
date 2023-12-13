@@ -1,0 +1,22 @@
+language: 'en'
+early_access: false
+reviews:
+  high_level_summary: true
+  poem: true
+  review_status: true
+  collapse_walkthrough: false
+  path_filters:
+    - '!**/.xml'
+  path_instructions:
+    - path: './src/*.ts'
+      instructions: 'Review TypeScript code in the src directory for adherence to TypeScript best practices and project-specific guidelines.'
+  auto_review:
+    enabled: true
+    ignore_title_keywords:
+      - 'WIP'
+      - 'DO NOT MERGE'
+    drafts: false
+    base_branches:
+      - 'master'
+chat:
+  auto_reply: true
