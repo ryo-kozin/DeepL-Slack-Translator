@@ -1,9 +1,9 @@
 import type * as express from 'express'
-import { extractTextAndTimestamp } from './extractTextAndTimestamp'
-import { translateText } from './translateText'
-import { postToSlack } from './postToSlack'
-import { type SlackEventBody } from './interfaces'
-import { Logger } from './../src/lib/logger'
+import { extractTextAndTimestamp } from './extractTextAndTimestamp.js'
+import { translateText } from './translateText.js'
+import { postToSlack } from './postToSlack.js'
+import { type SlackEventBody } from './interfaces.js'
+import { Logger } from './lib/logger.js'
 
 const logger = new Logger(process.env.APP_ENV ?? 'local')
 

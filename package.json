@@ -2,6 +2,7 @@
   "name": "deepl-slack-translator",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "dev-cp": "nodemon",
