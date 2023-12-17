@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Logger } from './../src/lib/logger'
+import { Logger } from './lib/logger.js'
 const logger = new Logger(process.env.APP_ENV ?? 'local')
 
 export async function postToSlack(text: string, ts: string): Promise<void> {

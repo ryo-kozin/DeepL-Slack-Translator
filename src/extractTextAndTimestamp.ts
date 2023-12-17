@@ -1,4 +1,4 @@
-import { type SlackEventBody } from './interfaces'
+import { type SlackEventBody } from './interfaces.js'
 
 export function extractTextAndTimestamp(body: SlackEventBody): {
   text: string
