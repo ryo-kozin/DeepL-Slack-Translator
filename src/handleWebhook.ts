@@ -14,6 +14,7 @@ export async function handleWebhook(
   try {
     if (req.body.challenge !== undefined && req.body.challenge !== '') {
       res.send(req.body.challenge)
+      return
     }
 
     const { text, ts } = extractTextAndTimestamp(req.body as SlackEventBody)
@@ -22,6 +23,7 @@ export async function handleWebhook(
 
     await postToSlack(translatedText, ts)
     res.send('Translation posted')
+    return
   } catch (e) {
     if (e instanceof Error) {
       logger.error(e.message)
